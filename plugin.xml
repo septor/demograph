@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Demograph" lan="" version="1.0" date="2015-12-20" compatibility="2.0" installRequired="true" >
+	<author name="Patrick Weaver" url="http://trickmod.com" />
+	<summary lan="">Basic information about your users.</summary>
+	<description lan="">Display demographic information about your users with charts and statistics.</description>
+	<keywords>
+		<word>charts</word>
+		<word>demograph</word>
+	</keywords>
+	<category>content</category>
+	<copyright>2015</copyright>
+	<adminLinks>
+		<link url="admin_config.php" description="" icon="" iconSmall="" primary="true" >LAN_CONFIGURE</link>
+	</adminLinks>
+	<pluginPrefs>
+		<pref name='visibility'>1</pref>
+	</pluginPrefs>
+</e107Plugin>
