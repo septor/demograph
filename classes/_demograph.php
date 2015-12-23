@@ -8,11 +8,6 @@
  */
 class Demograph
 {
-	function getExtendedId($name)
-	{
-		return e107::getDb()->retrieve('user_extended_struct', 'user_extended_struct_id', "user_extended_struct_name='".$name."'");
-	}
-
 	function generateChart($type, $data, $name, $animate='true')
 	{
 		$output = 'var '.$name.' = new CanvasJS.Chart("'.$name.'", {
