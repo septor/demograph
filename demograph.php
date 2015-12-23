@@ -14,28 +14,12 @@ $ns = e107::getRender();
 $dg = new Demograph;
 e107::js('demograph', 'js/canvasjs.min.js', 'jquery');
 
-$birthdays = $sql->retrieve('user_extended', 'user_birthday', 'user_birthday IS NOT NULL', true);
-$data = array();
-
-foreach($birthdays as $birthday)
-{
-	$age = $dg->calculateAge($birthday['user_birthday']);
-	if(array_key_exists($age, $data))
-		$data = array_replace($data, array($age => $data[$age]+1));
-	else
-		$data[$age] = 1;
-}
-
 e107::js('inline', '
 	window.onload = function () {
-		'.$dg->generateChart('column', $data, 'chart').'
+		'.$dg->generateChart($pref['birthday'], $dg->getAges(), 'chart').'
 	}
 ');
 
 require_once(HEADERF);
 
-$text = '
-<div id="chart" style="height: 300px; width: 100%;"></div>
-';
-
-$ns->tablerender('User Age', $text);
+$ns->tablerender('User Age', '<div id="chart" style="height: 300px; width: 100%;"></div>');
