@@ -27,8 +27,20 @@ class Demograph
 		return $output;
 	}
 
-	function calculateAge($birthday)
+	function getAges()
 	{
-		return round((time() - strtotime($birthday)) / 31557600);
+		$birthdays = e107::getDb()->retrieve('user_extended', 'user_birthday', 'user_birthday IS NOT NULL', true);
+		$data = array();
+
+		foreach($birthdays as $birthday)
+		{
+			$age = round((time() - strtotime($birthday['user_birthday'])) / 31557600);
+			if(array_key_exists($age, $data))
+				$data = array_replace($data, array($age => $data[$age]+1));
+			else
+				$data[$age] = 1;
+		}
+
+		return $data;
 	}
 }
