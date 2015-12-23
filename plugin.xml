@@ -13,6 +13,13 @@
 		<link url="admin_config.php" description="" icon="" iconSmall="" primary="true" >LAN_CONFIGURE</link>
 	</adminLinks>
 	<pluginPrefs>
-		<pref name='visibility'>1</pref>
+		<pref name='visibility'>253</pref>
+		<pref name='animate'>1</pref>
+		<pref name='birthday'>doughnut</pref>
+		<pref name='country'>pie</pref>
+		<pref name='gender'>column</pref>
+		<pref name='language'>column</pref>
+		<pref name='location'>pie</pref>
+		<pref name='timezone'>pie</pref>
 	</pluginPrefs>
 </e107Plugin>

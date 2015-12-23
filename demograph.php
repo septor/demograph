@@ -8,10 +8,10 @@
  */
 require_once('../../class2.php');
 require_once(e_PLUGIN.'demograph/classes/_demograph.php');
-$pref	= e107::pref('demograph');
-$sql	= e107::getDb();
-$ns		= e107::getRender();
-$dg		= new Demograph;
+$pref = e107::pref('demograph');
+$sql = e107::getDb();
+$ns = e107::getRender();
+$dg = new Demograph;
 e107::js('demograph', 'js/canvasjs.min.js', 'jquery');
 
 $birthdays = $sql->retrieve('user_extended', 'user_birthday', 'user_birthday IS NOT NULL', true);

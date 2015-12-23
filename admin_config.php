@@ -54,10 +54,77 @@ class demograph_ui extends e_admin_ui
 			'data' => 'str',
 			'help' => ''
 		),
+		'animate' => array(
+			'title' => 'Animate Charts?',
+			'type' => 'boolean',
+			'data' => 'str',
+			'help' => '',
+		),
+		'birthday' => array(
+			'title' => 'Birthday Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
+		'country' => array(
+			'title' => 'Country Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
+		'gender' => array(
+			'title' => 'Gender Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
+		'language' => array(
+			'title' => 'Language Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
+		'location' => array(
+			'title' => 'Location Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
+		'timezone' => array(
+			'title' => 'Timezone Chart Type',
+			'type' => 'dropdown',
+			'data' => 'str',
+			'help' => '',
+		),
 	);
 
 	public function init()
 	{
+		$this->chartTypes = array(
+			'column' => 'Column',
+			'line' => 'Line',
+			'bar' => 'Bar',
+			'pie' => 'Pie',
+			'doughnut' => 'Doughnut',
+			'spline' => 'Spline',
+			'stepLine' => 'Step Line',
+			'area' => 'Area',
+			'splineArea' => 'Spline Area',
+			'scatter' => 'Scatter/Point',
+			'bubble' => 'Bubble',
+			'rangeBar' => 'Range Bar',
+			'rangeArea' => 'Range Area',
+			'ohlc' => 'OHLC/Stock',
+			'candlestick' => 'Candlestick',
+			'dynamic' => 'Dynamic',
+		);
+
+		$this->prefs['birthday']['writeParms'] = $this->chartTypes;
+		$this->prefs['country']['writeParms'] = $this->chartTypes;
+		$this->prefs['gender']['writeParms'] = $this->chartTypes;
+		$this->prefs['language']['writeParms'] = $this->chartTypes;
+		$this->prefs['location']['writeParms'] = $this->chartTypes;
+		$this->prefs['timezone']['writeParms'] = $this->chartTypes;
 	}
 
 	public function beforeCreate($new_data)
@@ -85,15 +152,16 @@ class demograph_ui extends e_admin_ui
 	public function onUpdateError($new_data, $old_data, $id)
 	{
 	}
+}
 
-	class demograph_form_ui extends e_admin_form_ui
-	{
-	}
+class demograph_form_ui extends e_admin_form_ui
+{
+}
 
-	new demograph_adminArea();
+new demograph_adminArea();
 
-	require_once(e_ADMIN."auth.php");
-	e107::getAdminUI()->runPage();
+require_once(e_ADMIN."auth.php");
+e107::getAdminUI()->runPage();
 
-	require_once(e_ADMIN."footer.php");
-	exit;
+require_once(e_ADMIN."footer.php");
+exit;
