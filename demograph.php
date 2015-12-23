@@ -11,34 +11,31 @@ require_once(e_PLUGIN.'demograph/classes/_demograph.php');
 $pref	= e107::pref('demograph');
 $sql	= e107::getDb();
 $ns		= e107::getRender();
-
+$dg		= new Demograph;
 e107::js('demograph', 'js/canvasjs.min.js', 'jquery');
+
+$birthdays = $sql->retrieve('user_extended', 'user_birthday', 'user_birthday IS NOT NULL', true);
+$data = array();
+
+foreach($birthdays as $birthday)
+{
+	$age = $dg->calculateAge($birthday['user_birthday']);
+	if(array_key_exists($age, $data))
+		$data = array_replace($data, array($age => $data[$age]+1));
+	else
+		$data[$age] = 1;
+}
+
 e107::js('inline', '
-	// the below is dummy data for now
 	window.onload = function () {
-		var chart = new CanvasJS.Chart("chartContainer", {
-			title:{
-				text: "My First Chart in CanvasJS"
-			},
-			data: [
-			{
-				type: "line",
-				dataPoints: [
-					{ label: "apple",  y: 10  },
-					{ label: "orange", y: 15  },
-					{ label: "banana", y: 25  },
-					{ label: "mango",  y: 30  },
-					{ label: "grape",  y: 28  }
-				]
-			}
-			]
-		});
-		chart.render();
+		'.$dg->generateChart('column', $data, 'chart').'
 	}
 ');
 
 require_once(HEADERF);
 
-$text = '<div id="chartContainer" style="height: 300px; width: 100%;"></div>';
+$text = '
+<div id="chart" style="height: 300px; width: 100%;"></div>
+';
 
-$ns->tablerender('Demograph', $text);
+$ns->tablerender('User Age', $text);
