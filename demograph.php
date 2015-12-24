@@ -16,10 +16,14 @@ e107::js('demograph', 'js/canvasjs.min.js', 'jquery');
 
 e107::js('inline', '
 	window.onload = function () {
-		'.$dg->generateChart($pref['birthday'], $dg->getAges(), 'chart').'
+		'.$dg->generateChart($pref['birthday'], $dg->getInfo('user_birthday'), 'birthday').'
+		'.$dg->generateChart($pref['country'], $dg->getInfo('user_country'), 'country').'
+		'.$dg->generateChart($pref['gender'], $dg->getInfo('user_gender'), 'gender').'
 	}
 ');
 
 require_once(HEADERF);
 
-$ns->tablerender('User Age', '<div id="chart" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('User Age', '<div id="birthday" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('Country', '<div id="country" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('Gender', '<div id="gender" style="height: 300px; width: 100%;"></div>');

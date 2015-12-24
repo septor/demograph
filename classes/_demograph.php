@@ -16,8 +16,8 @@ class Demograph
 					type: "'.$type.'",
 					dataPoints: [
 					';
-					foreach($data as $key => $value)
-						$output .= '{y: '.$value.', label: "'.$key.'"},';
+					foreach($data as $item => $value)
+						$output .= '{y: '.$value.', label: "'.$item.'"},';
 
 					$output .= ']
 				}]
@@ -27,18 +27,26 @@ class Demograph
 		return $output;
 	}
 
-	function getAges()
+	function getInfo($type)
 	{
-		$birthdays = e107::getDb()->retrieve('user_extended', 'user_birthday', 'user_birthday IS NOT NULL', true);
+		$results = e107::getDb()->retrieve('user_extended', '*', $type.' IS NOT NULL', true);
 		$data = array();
 
-		foreach($birthdays as $birthday)
+		foreach($results as $field)
 		{
-			$age = round((time() - strtotime($birthday['user_birthday'])) / 31557600);
-			if(array_key_exists($age, $data))
-				$data = array_replace($data, array($age => $data[$age]+1));
+			if($type == 'user_birthday')
+				$item = round((time() - strtotime($field['user_birthday'])) / 31557600);
+			elseif($type == 'user_gender')
+				$item = ($field[$type] == 'M' ? 'Male' : 'Female');
 			else
-				$data[$age] = 1;
+				$item = $field[$type];
+
+			if(array_key_exists($item, $data))
+				$data = array_replace($data, array($item => $data[$item]+1));
+			else
+				$data[$item] = 1;
+
+			unset($item);
 		}
 
 		return $data;
