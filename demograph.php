@@ -30,3 +30,6 @@ require_once(HEADERF);
 $ns->tablerender('User Age', '<div id="birthday" style="height: 300px; width: 100%;"></div>');
 $ns->tablerender('Country', '<div id="country" style="height: 300px; width: 100%;"></div>');
 $ns->tablerender('Gender', '<div id="gender" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('Language', '<div id="language" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('Location', '<div id="location" style="height: 300px; width: 100%;"></div>');
+$ns->tablerender('Timezone', '<div id="timezone" style="height: 300px; width: 100%;"></div>');
