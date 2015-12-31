@@ -19,6 +19,9 @@ e107::js('inline', '
 		'.$dg->generateChart($pref['birthday'], $dg->getInfo('user_birthday'), 'birthday').'
 		'.$dg->generateChart($pref['country'], $dg->getInfo('user_country'), 'country').'
 		'.$dg->generateChart($pref['gender'], $dg->getInfo('user_gender'), 'gender').'
+		'.$dg->generateChart($pref['language'], $dg->getInfo('user_language'), 'langauge').'
+		'.$dg->generateChart($pref['location'], $dg->getInfo('user_location'), 'location').'
+		'.$dg->generateChart($pref['timezone'], $dg->getInfo('user_timezone'), 'timezone').'
 	}
 ');
 
