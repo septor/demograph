@@ -10,6 +10,8 @@ class Demograph
 {
 	function generateChart($type, $data, $name, $animate='true')
 	{
+		$totalUsers = intval(e107::getDb()->count('user'));
+		$unknown = $totalUsers;
 		$output = 'var '.$name.' = new CanvasJS.Chart("'.$name.'", {
 				animationEnabled: '.$animate.',
 				data: [{
@@ -17,8 +19,11 @@ class Demograph
 					dataPoints: [
 					';
 					foreach($data as $item => $value)
+					{
 						$output .= '{y: '.$value.', label: "'.$item.'"},';
-
+						$unknown -= $value;
+					}
+					$output .= '{y: '.$unknown.', label: "Unknown"},';
 					$output .= ']
 				}]
 			});
